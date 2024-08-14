@@ -2,11 +2,14 @@ import asyncio
 from aiogram import Dispatcher, Bot
 from handlers.not_in_game_handlers import router_not_in_game
 from handlers.in_game_handlers import router_in_game
-import os
+from environs import Env
 
 
 dp = Dispatcher()
-bot = Bot(token=os.getenv('BOT_TOKEN'))
+env = Env()
+env.read_env()
+bot_token = env('BOT_TOKEN')
+bot = Bot(bot_token)
 
 
 async def main():
